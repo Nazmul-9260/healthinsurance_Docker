@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DcsPushNotificationController;
 
-Route::get('/healthinsurance', function () {
+Route::get('/', function () {
     return view('welcome');
 });
 Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);

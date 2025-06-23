@@ -1,0 +1,25 @@
+-----------------  docker - Laravel -------
+
+
+docker-compose exec app php artisan config:clear
+
+docker-compose restart app
+
+
+db import :
+----------
+
+docker cp health_schema.sql postgres_db:health_schema.sql
+docker exec -it postgres_db bash
+psql -U qsoft -d healthinsurance -f /health_schema.sql
+
+
+bind mount 
+------------
+
+db:
+  ...
+  volumes:
+    - pg_data:/var/lib/postgresql/data
+    - ./health_schema.sql:/docker-entrypoint-initdb.d/health_schema.sql
+
