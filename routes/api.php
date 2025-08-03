@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\HealthInsurance\HealthInsuranceController;
 use App\Http\Controllers\ErpStatusUpdateController;
 use App\Http\Controllers\DcsPushNotificationController;
@@ -22,3 +23,8 @@ Route::post('/bm_actions_on_health_insurance',[HealthInsuranceController::class,
 Route::get('/statusUpdate',[ErpStatusUpdateController::class,'statusUpdate']);
 
 Route::post('/CropPushNotification',[DcsPushNotificationController::class, 'PushJsonDataForCropInsurance']);
+
+Route::get('/get_health_insurances',function(){
+    $data = DB::table('healthinsurance.health_insurance')->get();
+    return response()->json(['data' => $data]);
+});
